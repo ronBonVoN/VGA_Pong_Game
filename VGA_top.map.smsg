@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at vga_top.sv(235): always construct contains both blocking and non-blocking assignments File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 235
