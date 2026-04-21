@@ -78,6 +78,8 @@ wire [9:0] paddle_height = 10'd10;
 wire [9:0] paddle_step_x = 10'd1; 
 wire [9:0] paddle_step_y = 10'd1; 
 wire paddle_active; 
+wire upper_paddle_active; 
+wire lower_paddle_active; 
 
 reg [9:0] paddle_x_location = 10'd0;  
 reg [9:0] paddle_y_location = 10'd0;  
@@ -91,7 +93,10 @@ wire [9:0] ball_height = 10'd10;
 wire [9:0] ball_step_x = 10'd1; 
 wire [9:0] ball_step_y = 10'd1; 
 wire ball_active; 
-wire ball_wall_collision; 
+wire ball_left_wall_collision; 
+wire ball_right_wall_collision;
+wire ball_upper_wall_collision;
+wire ball_lower_wall_collision;
 
 reg [9:0] ball_x_location = 10'd0; 
 reg [9:0] ball_y_location = 10'd0; 
@@ -101,6 +106,13 @@ reg ball_move_up;
 reg ball_move_down; 
 
 reg [31:0] clock_counter = 32'd0; 
+reg clock_flip_flop = 1'd0; 
+
+wire past_ball_left_wall_collision; 
+wire past_ball_right_wall_collision;
+wire past_ball_upper_wall_collision;
+wire past_ball_lower_wall_collision;
+wire past_ball_paddle_collision; 
 
 make_box player_paddle (
 	.x_pix(X_pix), 
@@ -110,7 +122,10 @@ make_box player_paddle (
 	.box_x_location(paddle_x_location), 
 	.box_y_location(paddle_y_location), 
 	.pixel_clk(pixel_clk),
-	.box_active(paddle_active)
+	.box_active(paddle_active),
+	.upper_box_active(upper_paddle_active),
+	.lower_box_active(lower_paddle_active)
+	
 );  
 
 move_box move_player_paddle (
@@ -122,7 +137,10 @@ move_box move_player_paddle (
 	.move_left(paddle_move_left),
 	.move_up(paddle_move_up),
 	.move_down(paddle_move_down),
-	.wall_collision(),
+	.left_wall_collision(),
+	.right_wall_collision(),
+	.upper_wall_collision(),
+	.lower_wall_collision(),
 	.pixel_clk(pixel_clk),
 	.box_x_location(paddle_x_location), 
 	.box_y_location(paddle_y_location), 
@@ -136,7 +154,9 @@ make_box ball (
 	.box_x_location(ball_x_location), 
 	.box_y_location(ball_y_location), 
 	.pixel_clk(pixel_clk),
-	.box_active(ball_active)
+	.box_active(ball_active),
+	.upper_box_active(),
+	.lower_box_active()
 );  
 
 move_box move_ball (
@@ -148,7 +168,10 @@ move_box move_ball (
 	.move_left(ball_move_left),
 	.move_up(ball_move_up),
 	.move_down(ball_move_down),
-	.wall_collision(ball_wall_collision),
+	.left_wall_collision(ball_left_wall_collision),
+	.right_wall_collision(ball_right_wall_collision),
+	.upper_wall_collision(ball_upper_wall_collision),
+	.lower_wall_collision(ball_lower_wall_collision),
 	.pixel_clk(pixel_clk),
 	.box_x_location(ball_x_location), 
 	.box_y_location(ball_y_location), 
@@ -160,19 +183,55 @@ always @(posedge pixel_clk) begin
 		else if (ball_active) pixel_color <= 12'b1111_1111_1111; 
 		else pixel_color <= 12'b0000_0000_0000; 
 		
-		clock_counter <= clock_counter + 1'd1;
+		clock_counter <= clock_counter + 1'd1; 
+		clock_flip_flop <= !clock_flip_flop; 
 		
 		paddle_move_right <= 1'd0;
 		paddle_move_left <= 1'd0; 
 		paddle_move_up <= 1'd0; 
 		paddle_move_down <= 1'd0; 
-		
-		ball_move_right <= 1'd0;
+	
+		ball_move_right <= 1'd0; 
 		ball_move_left <= 1'd0; 
 		ball_move_up <= 1'd0; 
 		ball_move_down <= 1'd0; 
 		
-		if (clock_counter > 32'b0000_1111_1111_1111_1111) begin
+		if (ball_active && paddle_active && upper_paddle_active) begin
+			past_ball_upper_wall_collision <= 1'd0; 
+			past_ball_lower_wall_collision <= 1'd1; 
+			past_ball_right_wall_collision <= clock_flip_flop; 
+			past_ball_left_wall_collision <= !clock_flip_flop; 
+		end
+		
+		if (ball_active && paddle_active && lower_paddle_active) begin
+			past_ball_upper_wall_collision <= 1'd1; 
+			past_ball_lower_wall_collision <= 1'd0; 
+			past_ball_right_wall_collision <= clock_flip_flop; 
+			past_ball_left_wall_collision <= !clock_flip_flop; 
+		end
+		
+		if (ball_right_wall_collision) begin
+			past_ball_right_wall_collision <= 1'd1; 
+			past_ball_left_wall_collision <= 1'd0; 
+		end
+			
+		if (ball_left_wall_collision) begin
+			past_ball_left_wall_collision <= 1'd1; 
+			past_ball_right_wall_collision <= 1'd0; 
+		end
+				
+		if (ball_upper_wall_collision) begin 
+			past_ball_upper_wall_collision <= 1'd1; 
+			past_ball_lower_wall_collision <= 1'd0;  
+		end
+		
+		if (ball_lower_wall_collision) begin
+			past_ball_lower_wall_collision <= 1'd1; 
+			past_ball_upper_wall_collision <= 1'd0; 
+		end 
+		
+		
+		if (clock_counter > 32'b0001_1001_1111_1111_1111) begin
 			clock_counter <= 32'd0; 
 			
 			paddle_move_right <= SW[1] && SW[0]; 
@@ -180,8 +239,10 @@ always @(posedge pixel_clk) begin
 			paddle_move_up <= SW[3] && SW[2]; 
 			paddle_move_down <= SW[3] && !SW[2]; 
 			
-			ball_move_right 
-		
+			ball_move_right <= past_ball_left_wall_collision; 
+			ball_move_left <= past_ball_right_wall_collision; 
+			ball_move_up <= past_ball_lower_wall_collision; 
+			ball_move_down <= past_ball_upper_wall_collision || past_ball_paddle_collision; 
 		end		
 	end
 	
@@ -212,14 +273,28 @@ module make_box(
 	input logic [9:0] box_x_location,
 	input logic [9:0] box_y_location,
 	input pixel_clk,
-	output reg box_active
+	output reg box_active,
+	output reg upper_box_active, 
+	output reg lower_box_active
 ); 	
 	always @(posedge pixel_clk) begin	
 		box_active <= (x_pix > box_x_location) && 
 		              (x_pix < box_x_location + box_width) &&
 		              (y_pix > box_y_location) && 
 	      			  (y_pix < box_y_location + box_height); 
-		end
+		
+		upper_box_active <= (y_pix < box_y_location + box_height/2) &&
+							     (x_pix > box_x_location) && 
+								  (x_pix < box_x_location + box_width) &&
+		                    (y_pix > box_y_location) && 
+	      			        (y_pix < box_y_location + box_height); 
+		
+		lower_box_active <= (y_pix >= box_y_location + box_height/2) && 							     
+								  (x_pix > box_x_location) && 
+								  (x_pix < box_x_location + box_width) &&
+		                    (y_pix > box_y_location) && 
+	      			        (y_pix < box_y_location + box_height);
+	end
 endmodule
 
 module move_box(
@@ -232,7 +307,10 @@ module move_box(
 	input logic move_up, 
 	input logic move_down, 
 	input pixel_clk,
-	output wall_collision, 
+	output left_wall_collision, 
+	output right_wall_collision,
+	output upper_wall_collision,
+	output lower_wall_collision, 
 	output reg [9:0] box_x_location,
 	output reg [9:0] box_y_location
 ); 
@@ -252,6 +330,28 @@ module move_box(
 		else if (move_down)
 			box_y_location <= (box_y_location + step_y > SCREEN_HEIGHT - box_height) ? SCREEN_HEIGHT - box_height : box_y_location + step_y;
 	
-		wall_collision = (box_x_location + step_x > SCREEN_WIDTH - box_width) | (box_x_location < step_x) | (box_y_location < step_y) | (box_y_location + step_y > SCREEN_HEIGHT - box_height);
+		left_wall_collision <= (box_x_location <= step_x);
+		right_wall_collision <= (box_x_location + step_x >= SCREEN_WIDTH - box_width); 
+		upper_wall_collision <= (box_y_location <= step_y); 
+		lower_wall_collision <= (box_y_location + step_y >= SCREEN_HEIGHT - box_height); 
+	end
+endmodule
+
+module box_collision (
+	input box_active, 
+	input upper_target_collision,
+	input lower_target_collision,
+	input right_wall_collision,
+	input left_wall_collision, 
+	input upper_wall_collision, 
+	input lower_wall_collision,
+	output past_right_wall_collision,
+	output past_left_wall_collision,
+	output past_upper_wall_collision,
+	output past_lower_wall_collision
+); 
+	wire clock_flip = 1'd0; 
+	
+	always @(posedge pixel_clk) begin
 	end
 endmodule

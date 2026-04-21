@@ -1,5 +1,5 @@
 Analysis & Synthesis report for VGA_top
-Mon Apr 20 20:17:26 2026
+Tue Apr 21 07:46:20 2026
 Quartus Prime Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
 
 
@@ -32,7 +32,6 @@ Quartus Prime Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
  24. Post-Synthesis Netlist Statistics for Top Partition
  25. Elapsed Time Per Partition
  26. Analysis & Synthesis Messages
- 27. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -59,15 +58,15 @@ on the Quartus Prime software download page.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Apr 20 20:17:26 2026           ;
+; Analysis & Synthesis Status        ; Successful - Tue Apr 21 07:46:20 2026           ;
 ; Quartus Prime Version              ; 25.1std.0 Build 1129 10/21/2025 SC Lite Edition ;
 ; Revision Name                      ; VGA_top                                         ;
 ; Top-level Entity Name              ; VGA_top                                         ;
 ; Family                             ; MAX 10                                          ;
-; Total logic elements               ; 286                                             ;
-;     Total combinational functions  ; 276                                             ;
-;     Dedicated logic registers      ; 98                                              ;
-; Total registers                    ; 98                                              ;
+; Total logic elements               ; 467                                             ;
+;     Total combinational functions  ; 457                                             ;
+;     Dedicated logic registers      ; 131                                             ;
+; Total registers                    ; 131                                             ;
 ; Total pins                         ; 185                                             ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
@@ -203,20 +202,20 @@ on the Quartus Prime software download page.
 +---------------------------------------------+------------------------------------------------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                                                            ;
 +---------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 286                                                                                                              ;
+; Estimated Total logic elements              ; 467                                                                                                              ;
 ;                                             ;                                                                                                                  ;
-; Total combinational functions               ; 276                                                                                                              ;
+; Total combinational functions               ; 457                                                                                                              ;
 ; Logic element usage by number of LUT inputs ;                                                                                                                  ;
-;     -- 4 input functions                    ; 80                                                                                                               ;
-;     -- 3 input functions                    ; 61                                                                                                               ;
-;     -- <=2 input functions                  ; 135                                                                                                              ;
+;     -- 4 input functions                    ; 114                                                                                                              ;
+;     -- 3 input functions                    ; 126                                                                                                              ;
+;     -- <=2 input functions                  ; 217                                                                                                              ;
 ;                                             ;                                                                                                                  ;
 ; Logic elements by mode                      ;                                                                                                                  ;
-;     -- normal mode                          ; 131                                                                                                              ;
-;     -- arithmetic mode                      ; 145                                                                                                              ;
+;     -- normal mode                          ; 207                                                                                                              ;
+;     -- arithmetic mode                      ; 250                                                                                                              ;
 ;                                             ;                                                                                                                  ;
-; Total registers                             ; 98                                                                                                               ;
-;     -- Dedicated logic registers            ; 98                                                                                                               ;
+; Total registers                             ; 131                                                                                                              ;
+;     -- Dedicated logic registers            ; 131                                                                                                              ;
 ;     -- I/O registers                        ; 0                                                                                                                ;
 ;                                             ;                                                                                                                  ;
 ; I/O pins                                    ; 185                                                                                                              ;
@@ -227,9 +226,9 @@ on the Quartus Prime software download page.
 ;     -- PLLs                                 ; 1                                                                                                                ;
 ;                                             ;                                                                                                                  ;
 ; Maximum fan-out node                        ; DE10_VGA:VGA_Driver|altera_up_altpll:video_pll|altpll:PLL_for_DE_Series_Boards|altpll_p8a2:auto_generated|clk[0] ;
-; Maximum fan-out                             ; 99                                                                                                               ;
-; Total fan-out                               ; 1294                                                                                                             ;
-; Average fan-out                             ; 1.59                                                                                                             ;
+; Maximum fan-out                             ; 132                                                                                                              ;
+; Total fan-out                               ; 1868                                                                                                             ;
+; Average fan-out                             ; 1.81                                                                                                             ;
 +---------------------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 
@@ -238,37 +237,30 @@ on the Quartus Prime software download page.
 +--------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------------------------+------------------+--------------+
 ; Compilation Hierarchy Node                 ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                                                ; Entity Name      ; Library Name ;
 +--------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------------------------+------------------+--------------+
-; |VGA_top                                   ; 276 (43)            ; 98 (38)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 185  ; 0            ; 0          ; |VGA_top                                                                                                           ; VGA_top          ; work         ;
-;    |DE10_VGA:VGA_Driver|                   ; 80 (80)             ; 38 (38)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|DE10_VGA:VGA_Driver                                                                                       ; DE10_VGA         ; work         ;
+; |VGA_top                                   ; 457 (55)            ; 131 (45)                  ; 0           ; 0          ; 0            ; 0       ; 0         ; 185  ; 0            ; 0          ; |VGA_top                                                                                                           ; VGA_top          ; work         ;
+;    |DE10_VGA:VGA_Driver|                   ; 79 (79)             ; 38 (38)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|DE10_VGA:VGA_Driver                                                                                       ; DE10_VGA         ; work         ;
 ;       |altera_up_altpll:video_pll|         ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|DE10_VGA:VGA_Driver|altera_up_altpll:video_pll                                                            ; altera_up_altpll ; work         ;
 ;          |altpll:PLL_for_DE_Series_Boards| ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|DE10_VGA:VGA_Driver|altera_up_altpll:video_pll|altpll:PLL_for_DE_Series_Boards                            ; altpll           ; work         ;
 ;             |altpll_p8a2:auto_generated|   ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|DE10_VGA:VGA_Driver|altera_up_altpll:video_pll|altpll:PLL_for_DE_Series_Boards|altpll_p8a2:auto_generated ; altpll_p8a2      ; work         ;
-;    |make_box:ball|                         ; 7 (7)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|make_box:ball                                                                                             ; make_box         ; work         ;
-;    |make_box:player_paddle|                ; 56 (56)             ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|make_box:player_paddle                                                                                    ; make_box         ; work         ;
+;    |make_box:ball|                         ; 57 (57)             ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|make_box:ball                                                                                             ; make_box         ; work         ;
+;    |make_box:player_paddle|                ; 80 (80)             ; 3 (3)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|make_box:player_paddle                                                                                    ; make_box         ; work         ;
+;    |move_box:move_ball|                    ; 96 (96)             ; 24 (24)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|move_box:move_ball                                                                                        ; move_box         ; work         ;
 ;    |move_box:move_player_paddle|           ; 90 (90)             ; 20 (20)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |VGA_top|move_box:move_player_paddle                                                                               ; move_box         ; work         ;
 +--------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------------------------+------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                             ;
-+---------------------------------------------+--------------------------------------------------+
-; Register name                               ; Reason for Removal                               ;
-+---------------------------------------------+--------------------------------------------------+
-; pixel_color[1..3]                           ; Merged with pixel_color[0]                       ;
-; pixel_color[5..11]                          ; Merged with pixel_color[4]                       ;
-; move_box:move_ball|box_x_location[0,8]      ; Merged with move_box:move_ball|box_y_location[0] ;
-; move_box:move_ball|box_y_location[1,5]      ; Merged with move_box:move_ball|box_y_location[0] ;
-; move_box:move_ball|box_x_location[2]        ; Merged with move_box:move_ball|box_y_location[0] ;
-; move_box:move_ball|box_y_location[4,7,9]    ; Merged with move_box:move_ball|box_y_location[0] ;
-; move_box:move_ball|box_x_location[1]        ; Merged with move_box:move_ball|box_y_location[0] ;
-; move_box:move_ball|box_y_location[8]        ; Merged with move_box:move_ball|box_y_location[0] ;
-; move_box:move_ball|box_x_location[3,5..7,9] ; Merged with move_box:move_ball|box_y_location[0] ;
-; move_box:move_ball|box_y_location[2,3,6]    ; Merged with move_box:move_ball|box_y_location[0] ;
-; move_box:move_ball|box_x_location[4]        ; Merged with move_box:move_ball|box_y_location[0] ;
-; move_box:move_ball|box_y_location[0]        ; Stuck at GND due to stuck port data_in           ;
-; Total Number of Removed Registers = 30      ;                                                  ;
-+---------------------------------------------+--------------------------------------------------+
++-------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                  ;
++----------------------------------------+--------------------------------------------+
+; Register name                          ; Reason for Removal                         ;
++----------------------------------------+--------------------------------------------+
+; pixel_color[1..3]                      ; Merged with pixel_color[0]                 ;
+; pixel_color[5..11]                     ; Merged with pixel_color[4]                 ;
+; past_ball_upper_wall_collision         ; Merged with past_ball_lower_wall_collision ;
+; past_ball_right_wall_collision         ; Merged with past_ball_left_wall_collision  ;
+; Total Number of Removed Registers = 12 ;                                            ;
++----------------------------------------+--------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -276,12 +268,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 98    ;
+; Total registers                              ; 131   ;
 ; Number of registers using Synchronous Clear  ; 32    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 31    ;
+; Number of registers using Clock Enable       ; 53    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -302,8 +294,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
-; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |VGA_top|move_box:move_player_paddle|box_y_location[0] ;
-; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |VGA_top|move_box:move_player_paddle|box_x_location[5] ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |VGA_top|past_ball_right_wall_collision                ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; Yes        ; |VGA_top|past_ball_upper_wall_collision                ;
+; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |VGA_top|move_box:move_ball|box_y_location[7]          ;
+; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |VGA_top|move_box:move_player_paddle|box_y_location[1] ;
+; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |VGA_top|move_box:move_ball|box_x_location[0]          ;
+; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |VGA_top|move_box:move_player_paddle|box_x_location[6] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
 
 
@@ -779,35 +775,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------+--------+----------+------------------------------------------------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "move_box:move_ball"                                                                             ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port             ; Type   ; Severity ; Details                                                                             ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
-; box_width[9..4]  ; Input  ; Info     ; Stuck at GND                                                                        ;
-; box_width[3]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; box_width[2]     ; Input  ; Info     ; Stuck at GND                                                                        ;
-; box_width[1]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; box_width[0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
-; box_height[9..4] ; Input  ; Info     ; Stuck at GND                                                                        ;
-; box_height[3]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; box_height[2]    ; Input  ; Info     ; Stuck at GND                                                                        ;
-; box_height[1]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; box_height[0]    ; Input  ; Info     ; Stuck at GND                                                                        ;
-; step_x[9..1]     ; Input  ; Info     ; Stuck at GND                                                                        ;
-; step_x[0]        ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; step_y[9..1]     ; Input  ; Info     ; Stuck at GND                                                                        ;
-; step_y[0]        ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; move_right       ; Input  ; Info     ; Stuck at GND                                                                        ;
-; move_left        ; Input  ; Info     ; Stuck at GND                                                                        ;
-; move_up          ; Input  ; Info     ; Stuck at GND                                                                        ;
-; move_down        ; Input  ; Info     ; Stuck at GND                                                                        ;
-; wall_collision   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
-
-
 +----------------------------------------------------+
-; Port Connectivity Checks: "make_box:ball"          ;
+; Port Connectivity Checks: "move_box:move_ball"     ;
 +------------------+-------+----------+--------------+
 ; Port             ; Type  ; Severity ; Details      ;
 +------------------+-------+----------+--------------+
@@ -821,30 +790,57 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; box_height[2]    ; Input ; Info     ; Stuck at GND ;
 ; box_height[1]    ; Input ; Info     ; Stuck at VCC ;
 ; box_height[0]    ; Input ; Info     ; Stuck at GND ;
+; step_x[9..1]     ; Input ; Info     ; Stuck at GND ;
+; step_x[0]        ; Input ; Info     ; Stuck at VCC ;
+; step_y[9..1]     ; Input ; Info     ; Stuck at GND ;
+; step_y[0]        ; Input ; Info     ; Stuck at VCC ;
 +------------------+-------+----------+--------------+
 
 
 +---------------------------------------------------------------+
-; Port Connectivity Checks: "move_box:move_player_paddle"       ;
+; Port Connectivity Checks: "make_box:ball"                     ;
 +------------------+--------+----------+------------------------+
 ; Port             ; Type   ; Severity ; Details                ;
 +------------------+--------+----------+------------------------+
-; box_width[6..5]  ; Input  ; Info     ; Stuck at VCC           ;
-; box_width[9..7]  ; Input  ; Info     ; Stuck at GND           ;
-; box_width[4..3]  ; Input  ; Info     ; Stuck at GND           ;
-; box_width[1..0]  ; Input  ; Info     ; Stuck at GND           ;
-; box_width[2]     ; Input  ; Info     ; Stuck at VCC           ;
+; box_width[9..4]  ; Input  ; Info     ; Stuck at GND           ;
+; box_width[3]     ; Input  ; Info     ; Stuck at VCC           ;
+; box_width[2]     ; Input  ; Info     ; Stuck at GND           ;
+; box_width[1]     ; Input  ; Info     ; Stuck at VCC           ;
+; box_width[0]     ; Input  ; Info     ; Stuck at GND           ;
 ; box_height[9..4] ; Input  ; Info     ; Stuck at GND           ;
 ; box_height[3]    ; Input  ; Info     ; Stuck at VCC           ;
 ; box_height[2]    ; Input  ; Info     ; Stuck at GND           ;
 ; box_height[1]    ; Input  ; Info     ; Stuck at VCC           ;
 ; box_height[0]    ; Input  ; Info     ; Stuck at GND           ;
-; step_x[9..1]     ; Input  ; Info     ; Stuck at GND           ;
-; step_x[0]        ; Input  ; Info     ; Stuck at VCC           ;
-; step_y[9..1]     ; Input  ; Info     ; Stuck at GND           ;
-; step_y[0]        ; Input  ; Info     ; Stuck at VCC           ;
-; wall_collision   ; Output ; Info     ; Explicitly unconnected ;
+; upper_box_active ; Output ; Info     ; Explicitly unconnected ;
+; lower_box_active ; Output ; Info     ; Explicitly unconnected ;
 +------------------+--------+----------+------------------------+
+
+
++-------------------------------------------------------------------+
+; Port Connectivity Checks: "move_box:move_player_paddle"           ;
++----------------------+--------+----------+------------------------+
+; Port                 ; Type   ; Severity ; Details                ;
++----------------------+--------+----------+------------------------+
+; box_width[6..5]      ; Input  ; Info     ; Stuck at VCC           ;
+; box_width[9..7]      ; Input  ; Info     ; Stuck at GND           ;
+; box_width[4..3]      ; Input  ; Info     ; Stuck at GND           ;
+; box_width[1..0]      ; Input  ; Info     ; Stuck at GND           ;
+; box_width[2]         ; Input  ; Info     ; Stuck at VCC           ;
+; box_height[9..4]     ; Input  ; Info     ; Stuck at GND           ;
+; box_height[3]        ; Input  ; Info     ; Stuck at VCC           ;
+; box_height[2]        ; Input  ; Info     ; Stuck at GND           ;
+; box_height[1]        ; Input  ; Info     ; Stuck at VCC           ;
+; box_height[0]        ; Input  ; Info     ; Stuck at GND           ;
+; step_x[9..1]         ; Input  ; Info     ; Stuck at GND           ;
+; step_x[0]            ; Input  ; Info     ; Stuck at VCC           ;
+; step_y[9..1]         ; Input  ; Info     ; Stuck at GND           ;
+; step_y[0]            ; Input  ; Info     ; Stuck at VCC           ;
+; left_wall_collision  ; Output ; Info     ; Explicitly unconnected ;
+; right_wall_collision ; Output ; Info     ; Explicitly unconnected ;
+; upper_wall_collision ; Output ; Info     ; Explicitly unconnected ;
+; lower_wall_collision ; Output ; Info     ; Explicitly unconnected ;
++----------------------+--------+----------+------------------------+
 
 
 +----------------------------------------------------+
@@ -871,25 +867,25 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 185                         ;
-; cycloneiii_ff         ; 98                          ;
-;     ENA               ; 31                          ;
+; cycloneiii_ff         ; 131                         ;
+;     ENA               ; 53                          ;
 ;     SCLR              ; 32                          ;
-;     plain             ; 35                          ;
+;     plain             ; 46                          ;
 ; cycloneiii_io_obuf    ; 71                          ;
-; cycloneiii_lcell_comb ; 279                         ;
-;     arith             ; 145                         ;
-;         2 data inputs ; 107                         ;
-;         3 data inputs ; 38                          ;
-;     normal            ; 134                         ;
-;         0 data inputs ; 1                           ;
-;         1 data inputs ; 12                          ;
-;         2 data inputs ; 18                          ;
-;         3 data inputs ; 23                          ;
-;         4 data inputs ; 80                          ;
+; cycloneiii_lcell_comb ; 460                         ;
+;     arith             ; 250                         ;
+;         2 data inputs ; 165                         ;
+;         3 data inputs ; 85                          ;
+;     normal            ; 210                         ;
+;         0 data inputs ; 2                           ;
+;         1 data inputs ; 19                          ;
+;         2 data inputs ; 34                          ;
+;         3 data inputs ; 41                          ;
+;         4 data inputs ; 114                         ;
 ; cycloneiii_pll        ; 1                           ;
 ;                       ;                             ;
-; Max LUT depth         ; 6.30                        ;
-; Average LUT depth     ; 3.15                        ;
+; Max LUT depth         ; 6.40                        ;
+; Average LUT depth     ; 3.64                        ;
 +-----------------------+-----------------------------+
 
 
@@ -908,23 +904,22 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
-    Info: Processing started: Mon Apr 20 20:17:16 2026
+    Info: Processing started: Tue Apr 21 07:46:09 2026
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off VGA -c VGA_top
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
-Warning (10275): Verilog HDL Module Instantiation warning at vga_top.sv(129): ignored dangling comma in List of Port Connections File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 129
-Warning (10275): Verilog HDL Module Instantiation warning at vga_top.sv(155): ignored dangling comma in List of Port Connections File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 155
-Warning (12125): Using design file vga_top.sv, which is not specified as a design file for the current project, but contains definitions for 5 design units and 5 entities in project
+Warning (10275): Verilog HDL Module Instantiation warning at vga_top.sv(147): ignored dangling comma in List of Port Connections File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 147
+Warning (10275): Verilog HDL Module Instantiation warning at vga_top.sv(178): ignored dangling comma in List of Port Connections File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 178
+Warning (12125): Using design file vga_top.sv, which is not specified as a design file for the current project, but contains definitions for 6 design units and 6 entities in project
     Info (12023): Found entity 1: altera_up_altpll File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/PLL_PIXEL_CLK.v Line: 29
     Info (12023): Found entity 2: DE10_VGA File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/DE10_VGA.sv Line: 9
     Info (12023): Found entity 3: VGA_top File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 6
-    Info (12023): Found entity 4: make_box File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 200
-    Info (12023): Found entity 5: move_box File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 218
+    Info (12023): Found entity 4: make_box File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 268
+    Info (12023): Found entity 5: move_box File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 300
+    Info (12023): Found entity 6: box_collision File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 340
 Info (12127): Elaborating entity "VGA_top" for the top level hierarchy
-Warning (10030): Net "ball_move_right" at vga_top.sv(98) has no driver or initial value, using a default initial value '0' File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 98
-Warning (10030): Net "ball_move_left" at vga_top.sv(99) has no driver or initial value, using a default initial value '0' File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 99
-Warning (10030): Net "ball_move_up" at vga_top.sv(100) has no driver or initial value, using a default initial value '0' File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 100
-Warning (10030): Net "ball_move_down" at vga_top.sv(101) has no driver or initial value, using a default initial value '0' File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 101
+Warning (10858): Verilog HDL warning at vga_top.sv(115): object past_ball_paddle_collision used but never assigned File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 115
+Warning (10030): Net "past_ball_paddle_collision" at vga_top.sv(115) has no driver or initial value, using a default initial value '0' File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 115
 Warning (10034): Output port "DRAM_ADDR" at vga_top.sv(13) has no driver File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 13
 Warning (10034): Output port "DRAM_BA" at vga_top.sv(14) has no driver File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 14
 Warning (10034): Output port "HEX0" at vga_top.sv(26) has no driver File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 26
@@ -944,9 +939,9 @@ Warning (10034): Output port "DRAM_UDQM" at vga_top.sv(22) has no driver File: C
 Warning (10034): Output port "DRAM_WE_N" at vga_top.sv(23) has no driver File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 23
 Warning (10034): Output port "GSENSOR_CS_N" at vga_top.sv(50) has no driver File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 50
 Warning (10034): Output port "GSENSOR_SCLK" at vga_top.sv(52) has no driver File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 52
-Info (12128): Elaborating entity "make_box" for hierarchy "make_box:player_paddle" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 114
-Info (12128): Elaborating entity "move_box" for hierarchy "move_box:move_player_paddle" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 129
-Info (12128): Elaborating entity "DE10_VGA" for hierarchy "DE10_VGA:VGA_Driver" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 197
+Info (12128): Elaborating entity "make_box" for hierarchy "make_box:player_paddle" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 129
+Info (12128): Elaborating entity "move_box" for hierarchy "move_box:move_player_paddle" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 147
+Info (12128): Elaborating entity "DE10_VGA" for hierarchy "DE10_VGA:VGA_Driver" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 265
 Info (12128): Elaborating entity "altera_up_altpll" for hierarchy "DE10_VGA:VGA_Driver|altera_up_altpll:video_pll" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/DE10_VGA.sv Line: 202
 Info (12128): Elaborating entity "altpll" for hierarchy "DE10_VGA:VGA_Driver|altera_up_altpll:video_pll|altpll:PLL_for_DE_Series_Boards" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/PLL_PIXEL_CLK.v Line: 140
 Info (12130): Elaborated megafunction instantiation "DE10_VGA:VGA_Driver|altera_up_altpll:video_pll|altpll:PLL_for_DE_Series_Boards" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/PLL_PIXEL_CLK.v Line: 140
@@ -1177,7 +1172,6 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "GSENSOR_CS_N" is stuck at GND File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 50
     Warning (13410): Pin "GSENSOR_SCLK" is stuck at GND File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 52
 Info (286030): Timing-Driven Synthesis is running
-Info (144001): Generated suppressed messages file C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/VGA_top.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
 Warning (15897): PLL "DE10_VGA:VGA_Driver|altera_up_altpll:video_pll|altpll:PLL_for_DE_Series_Boards|altpll_p8a2:auto_generated|pll1" has parameter compensate_clock set to clock0 but port CLK[0] is not connected File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/db/altpll_p8a2.tdf Line: 28
@@ -1195,22 +1189,16 @@ Warning (21074): Design contains 12 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[9]" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 40
     Warning (15610): No output dependent on input pin "GSENSOR_INT[1]" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 51
     Warning (15610): No output dependent on input pin "GSENSOR_INT[2]" File: C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/vga_top.sv Line: 51
-Info (21057): Implemented 474 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 658 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 17 input pins
     Info (21059): Implemented 97 output pins
     Info (21060): Implemented 71 bidirectional pins
-    Info (21061): Implemented 288 logic cells
+    Info (21061): Implemented 472 logic cells
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 200 warnings
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 198 warnings
     Info: Peak virtual memory: 4818 megabytes
-    Info: Processing ended: Mon Apr 20 20:17:27 2026
+    Info: Processing ended: Tue Apr 21 07:46:20 2026
     Info: Elapsed time: 00:00:11
     Info: Total CPU time (on all processors): 00:00:24
-
-
-+------------------------------------------+
-; Analysis & Synthesis Suppressed Messages ;
-+------------------------------------------+
-The suppressed messages can be found in C:/Users/veron/Desktop/Files/College/ECE 275 - Sequential Logic Systems/ECE 275 - Labs/VGA/VGA_top.map.smsg.
 
 
