@@ -3,11 +3,11 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'VGA_Driver|video_pll|PLL_for_DE_Series_Boards|auto_generated|pll1|clk[1]'
-Slack : 33.302
+Slack : 31.558
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'VGA_Driver|video_pll|PLL_for_DE_Series_Boards|auto_generated|pll1|clk[1]'
-Slack : 0.419
+Slack : 0.418
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'MAX10_CLK1_50'
@@ -15,11 +15,11 @@ Slack : 9.873
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'VGA_Driver|video_pll|PLL_for_DE_Series_Boards|auto_generated|pll1|clk[1]'
-Slack : 19.723
+Slack : 19.721
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'VGA_Driver|video_pll|PLL_for_DE_Series_Boards|auto_generated|pll1|clk[1]'
-Slack : 33.781
+Slack : 32.067
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'VGA_Driver|video_pll|PLL_for_DE_Series_Boards|auto_generated|pll1|clk[1]'
@@ -31,11 +31,11 @@ Slack : 9.894
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'VGA_Driver|video_pll|PLL_for_DE_Series_Boards|auto_generated|pll1|clk[1]'
-Slack : 19.710
+Slack : 19.709
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'VGA_Driver|video_pll|PLL_for_DE_Series_Boards|auto_generated|pll1|clk[1]'
-Slack : 37.041
+Slack : 36.124
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'VGA_Driver|video_pll|PLL_for_DE_Series_Boards|auto_generated|pll1|clk[1]'
@@ -47,7 +47,7 @@ Slack : 9.666
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'VGA_Driver|video_pll|PLL_for_DE_Series_Boards|auto_generated|pll1|clk[1]'
-Slack : 19.804
+Slack : 19.796
 TNS   : 0.000
 
 ------------------------------------------------------------

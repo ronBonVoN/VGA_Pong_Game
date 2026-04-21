@@ -1,5 +1,6 @@
 // either this 
 `include "./DE10_VGA.sv" 
+`include "../Modules/Three_Digit_BCD_Display.sv"
 // XOR "Project Navigator" > "File" > Add files > DE10_VGA.v
 // not both
 
@@ -106,13 +107,12 @@ reg ball_move_up;
 reg ball_move_down; 
 
 reg [31:0] clock_counter = 32'd0; 
-reg clock_flip_flop = 1'd0; 
 
 wire past_ball_left_wall_collision; 
 wire past_ball_right_wall_collision;
 wire past_ball_upper_wall_collision;
 wire past_ball_lower_wall_collision;
-wire past_ball_paddle_collision; 
+logic [7:0] paddle_collision_count = 8'd0; 
 
 make_box player_paddle (
 	.x_pix(X_pix), 
@@ -177,6 +177,29 @@ move_box move_ball (
 	.box_y_location(ball_y_location), 
 ); 
 
+box_collision ball_collision (
+	.moveing_box_active(ball_active),
+	.target_active(paddle_active),
+	.upper_target_active(upper_paddle_active),
+	.lower_target_active(lower_paddle_active),
+	.right_wall_collision(ball_right_wall_collision),
+	.left_wall_collision(ball_left_wall_collision), 
+	.upper_wall_collision(ball_upper_wall_collision), 
+	.lower_wall_collision(ball_lower_wall_collision),
+	.pixel_clk(pixel_clk),
+	.past_right_wall_collision(past_ball_right_wall_collision),
+	.past_left_wall_collision(past_ball_left_wall_collision),
+	.past_upper_wall_collision(past_ball_upper_wall_collision),
+	.past_lower_wall_collision(past_ball_lower_wall_collision),
+	.target_collision_count(paddle_collision_count)
+); 
+
+Three_Digit_BCD_Display (
+	.value(paddle_collision_count),
+	.HEX0(HEX0),
+   .HEX1(HEX1),
+   .HEX2(HEX2)
+);
 
 always @(posedge pixel_clk) begin 
 		if (paddle_active) pixel_color <= 12'b0000_0000_1111; 
@@ -184,7 +207,6 @@ always @(posedge pixel_clk) begin
 		else pixel_color <= 12'b0000_0000_0000; 
 		
 		clock_counter <= clock_counter + 1'd1; 
-		clock_flip_flop <= !clock_flip_flop; 
 		
 		paddle_move_right <= 1'd0;
 		paddle_move_left <= 1'd0; 
@@ -195,42 +217,7 @@ always @(posedge pixel_clk) begin
 		ball_move_left <= 1'd0; 
 		ball_move_up <= 1'd0; 
 		ball_move_down <= 1'd0; 
-		
-		if (ball_active && paddle_active && upper_paddle_active) begin
-			past_ball_upper_wall_collision <= 1'd0; 
-			past_ball_lower_wall_collision <= 1'd1; 
-			past_ball_right_wall_collision <= clock_flip_flop; 
-			past_ball_left_wall_collision <= !clock_flip_flop; 
-		end
-		
-		if (ball_active && paddle_active && lower_paddle_active) begin
-			past_ball_upper_wall_collision <= 1'd1; 
-			past_ball_lower_wall_collision <= 1'd0; 
-			past_ball_right_wall_collision <= clock_flip_flop; 
-			past_ball_left_wall_collision <= !clock_flip_flop; 
-		end
-		
-		if (ball_right_wall_collision) begin
-			past_ball_right_wall_collision <= 1'd1; 
-			past_ball_left_wall_collision <= 1'd0; 
-		end
-			
-		if (ball_left_wall_collision) begin
-			past_ball_left_wall_collision <= 1'd1; 
-			past_ball_right_wall_collision <= 1'd0; 
-		end
 				
-		if (ball_upper_wall_collision) begin 
-			past_ball_upper_wall_collision <= 1'd1; 
-			past_ball_lower_wall_collision <= 1'd0;  
-		end
-		
-		if (ball_lower_wall_collision) begin
-			past_ball_lower_wall_collision <= 1'd1; 
-			past_ball_upper_wall_collision <= 1'd0; 
-		end 
-		
-		
 		if (clock_counter > 32'b0001_1001_1111_1111_1111) begin
 			clock_counter <= 32'd0; 
 			
@@ -242,7 +229,7 @@ always @(posedge pixel_clk) begin
 			ball_move_right <= past_ball_left_wall_collision; 
 			ball_move_left <= past_ball_right_wall_collision; 
 			ball_move_up <= past_ball_lower_wall_collision; 
-			ball_move_down <= past_ball_upper_wall_collision || past_ball_paddle_collision; 
+			ball_move_down <= past_ball_upper_wall_collision; 
 		end		
 	end
 	
@@ -284,16 +271,16 @@ module make_box(
 	      			  (y_pix < box_y_location + box_height); 
 		
 		upper_box_active <= (y_pix < box_y_location + box_height/2) &&
-							     (x_pix > box_x_location) && 
-								  (x_pix < box_x_location + box_width) &&
-		                    (y_pix > box_y_location) && 
-	      			        (y_pix < box_y_location + box_height); 
-		
-		lower_box_active <= (y_pix >= box_y_location + box_height/2) && 							     
 								  (x_pix > box_x_location) && 
 								  (x_pix < box_x_location + box_width) &&
-		                    (y_pix > box_y_location) && 
-	      			        (y_pix < box_y_location + box_height);
+								  (y_pix > box_y_location) && 
+								  (y_pix < box_y_location + box_height);
+		
+		lower_box_active <= (y_pix >= box_y_location + box_height/2) &&
+								  (x_pix > box_x_location) && 
+								  (x_pix < box_x_location + box_width) &&
+								  (y_pix > box_y_location) && 
+								  (y_pix < box_y_location + box_height);
 	end
 endmodule
 
@@ -338,20 +325,71 @@ module move_box(
 endmodule
 
 module box_collision (
-	input box_active, 
-	input upper_target_collision,
-	input lower_target_collision,
+	input moveing_box_active, 
+	input target_active,
+	input upper_target_active,
+	input lower_target_active,
 	input right_wall_collision,
 	input left_wall_collision, 
 	input upper_wall_collision, 
 	input lower_wall_collision,
-	output past_right_wall_collision,
-	output past_left_wall_collision,
-	output past_upper_wall_collision,
-	output past_lower_wall_collision
+	input pixel_clk,
+	output reg past_right_wall_collision,
+	output reg past_left_wall_collision,
+	output reg past_upper_wall_collision,
+	output reg past_lower_wall_collision,
+	output reg [7:0] target_collision_count
 ); 
-	wire clock_flip = 1'd0; 
+	
+	reg [31:0] clock_counter = 32'd0; 
+	reg clock_flip_flop = 1'd0; 
+	reg past_target_collision = 1'd0; 
 	
 	always @(posedge pixel_clk) begin
+		clock_flip_flop = !clock_flip_flop; 
+		clock_counter <= clock_counter + 1'd1; 
+		
+		if (moveing_box_active && target_active && !past_target_collision) past_target_collision <= 1'd1;
+		
+		if (moveing_box_active && upper_target_active) begin
+			past_upper_wall_collision <= 1'd0; 
+			past_lower_wall_collision <= 1'd1; 
+			past_right_wall_collision <= clock_flip_flop; 
+			past_left_wall_collision <= !clock_flip_flop; 
+		end			
+		
+		if (moveing_box_active && lower_target_active) begin
+			past_upper_wall_collision <= 1'd1; 
+			past_lower_wall_collision <= 1'd0; 
+			past_right_wall_collision <= clock_flip_flop; 
+			past_left_wall_collision <= !clock_flip_flop; 
+		end
+		
+		if (clock_counter > 32'b0000_1000_1111_1111_1111_1111_1111_1111 && 
+		!target_active && !moveing_box_active && past_target_collision) begin
+			clock_counter <= 32'd0; 
+			past_target_collision <= 1'd0;
+			target_collision_count <= target_collision_count + 8'd1;
+		end
+		
+		if (right_wall_collision) begin
+			past_right_wall_collision <= 1'd1; 
+			past_left_wall_collision <= 1'd0; 
+		end
+			
+		if (left_wall_collision) begin
+			past_left_wall_collision <= 1'd1; 
+			past_right_wall_collision <= 1'd0; 
+		end
+				
+		if (upper_wall_collision) begin 
+			past_upper_wall_collision <= 1'd1; 
+			past_lower_wall_collision <= 1'd0;  
+		end
+		
+		if (lower_wall_collision) begin
+			past_lower_wall_collision <= 1'd1; 
+			past_upper_wall_collision <= 1'd0; 
+		end 
 	end
 endmodule
